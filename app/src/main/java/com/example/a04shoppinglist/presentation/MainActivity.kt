@@ -15,10 +15,14 @@ class MainActivity : AppCompatActivity() {
 
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        var count = 0
         viewModel.shopList.observe(this){
             Log.d("MyMsg", it.toString())
+            if (count++ == 0) {
+                val item = it[0]
+                viewModel.changeEnableStateShopItem(item)
+            }
         }
-
-        viewModel.getShopList()
     }
 }
